@@ -1,0 +1,19 @@
+<html>
+    <head>
+       <title>Cat Details</title>
+       <link rel="stylesheet" href="../style.css">
+    </head>
+    <body>
+      <h1><%= name %>'s Details</h1>
+      <img src="<%= image %>">
+      <p><b>Favorite food:</b> <%= food %></p>
+      <p><b>Age:</b> <%= age %></p>
+      <p><b>Sleeping spots:</b>
+      <ul>
+          <% for(var i=0; i<sleeping_spots.length; i++) { %>
+              <li><%= sleeping_spots[i] %></li>
+          <% } %>
+      </ul></p>
+      <p><a href="/cats">Back</a></p>
+    </body>
+</html>

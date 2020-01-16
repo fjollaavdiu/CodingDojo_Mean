@@ -1,0 +1,17 @@
+*{
+    margin: 5px;
+    padding: 5px;
+}
+
+body{
+    color: #444;
+    background-color: #EEE;
+}
+
+img{
+    width: 300px;
+}
+
+ul{
+    padding-left: 60px;
+}

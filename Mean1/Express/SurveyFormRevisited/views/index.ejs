@@ -1,0 +1,70 @@
+<html>
+
+<head>
+
+  <title>Survey Form Revisited</title>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+
+  <script type="text/javascript">
+
+    $(document).ready(function () {
+
+      var socket = io.connect();
+      $('#form').submit(function (event) {
+        event.preventDefault();
+        socket.emit("posting_form", {
+          name: $('#name').val(),
+          location: $('#location').val(),
+          favLanguage: $('#favLanguage').val(),
+          comment: $('#comment').val()
+        })
+
+        socket.on('updated_message', function (data) {
+          $('#response').html("You emitted the following information to the server: " + JSON.stringify(data.response));
+        });
+
+        socket.on('random_number', function (data) {
+          $('#number').html("Your lucky number emitted by the server is " + JSON.stringify(data.response));
+        });
+        
+      });
+    });
+
+  </script>
+
+</head>
+
+<body>
+  <center>
+    <br>
+  <div id="response"></div>
+  <div id="number"></div>
+
+    <h1>Survey</h1>
+    <form id="form" method="post">
+      Your Name:
+      <input type="text" name="name" id="name">
+      <br> Dojo Location:
+      <select name="location" id="location">
+        <option value="Chicago">Chicago</option>
+        <option value="San Jose">San Jose</option>
+        <option value="Seattle">Seattle</option>
+        <option value="The Moon">The Moon</option>
+      </select>
+      <br> Favorite Language:
+      <select name="favLanguage" id="favLanguage">
+        <option value="Python">Python</option>
+        <option value="HTML">HTML</option>
+        <option value="C#">C#</option>
+        <option value="JavaScript">JavaScript</option>
+      </select>
+      <br> Comment (optional):
+      <input type="textarea" name="comment" id="comment">
+      <br>
+      <input type="submit" name="button" value="Submit">
+    </form>
+  </center>
+</body>
+
+</html>
